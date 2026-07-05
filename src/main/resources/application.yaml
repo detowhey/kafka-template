@@ -1,3 +1,14 @@
 spring:
-  application:
-    name: kafka-template
+  kafka:
+    bootstrap-servers: localhost:9092
+  data:
+    mongodb:
+      uri: mongodb://root:secret@localhost:27017/persondatabase?authSource=admin
+
+  cloud:
+    stream:
+      bindings:
+        registerNewPerson-in-0:
+          destination: register-person-topic
+          group: person-consumer-group
+          content-type: application/json

@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: person-service
+
+  jackson:
+    deserialization:
+      fail-on-unknown-properties: false

@@ -18,7 +18,7 @@ repositories {
 
 ext {
 	springCloudVersion = "2025.0.3"
-
+	apacheLang3Version = "3.20.0"
 }
 
 dependencies {
@@ -32,6 +32,7 @@ dependencies {
 	developmentOnly 'org.springframework.boot:spring-boot-docker-compose'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.cloud:spring-cloud-stream-test-binder'
+	implementation "org.apache.commons:commons-lang3:$apacheLang3Version"
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 

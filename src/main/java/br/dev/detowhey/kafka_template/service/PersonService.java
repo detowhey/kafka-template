@@ -1,6 +1,5 @@
 package br.dev.detowhey.kafka_template.service;
 
-import br.dev.detowhey.kafka_template.messaging.PersonConsumer;
 import br.dev.detowhey.kafka_template.model.Person;
 import br.dev.detowhey.kafka_template.repostiory.PersonRepository;
 import org.slf4j.Logger;

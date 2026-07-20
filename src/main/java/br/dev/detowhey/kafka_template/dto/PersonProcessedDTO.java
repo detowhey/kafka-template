@@ -1,21 +1,17 @@
 package br.dev.detowhey.kafka_template.dto;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
-import jakarta.validation.constraints.Size;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
-import static br.dev.detowhey.kafka_template.util.Constants.*;
+import java.time.LocalDateTime;
 
-public record PersonDTO(
-        @NotBlank(message = MESSAGE_ERROR_NULL_OR_BLANK_PROPERTY)
-        @Size(min = 5, max = 80, message = MESSAGE_ERROR_PERSON_NAME)
+public record PersonProcessedDTO(
+        String id,
         String name,
-        @NotNull(message = MESSAGE_ERROR_NOT_NULL)
-        @Positive(message = MESSAGE_ERROR_PERSON_AGE)
-        Integer age
+        Integer age,
+        @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
+        LocalDateTime createdAt
 ) {
 
     public static Builder builder() {
@@ -24,13 +20,22 @@ public record PersonDTO(
 
     public Builder toBuilder() {
         return new Builder()
+                .withId(this.id)
                 .withName(this.name)
-                .withAge(this.age);
+                .withAge(this.age)
+                .withCreatedAt(this.createdAt);
     }
 
     public static class Builder {
+        private String id;
         private String name;
         private Integer age;
+        private LocalDateTime createdAt;
+
+        public Builder withId(String id) {
+            this.id = id;
+            return this;
+        }
 
         public Builder withName(String name) {
             this.name = name;
@@ -42,8 +47,13 @@ public record PersonDTO(
             return this;
         }
 
-        public PersonDTO build() {
-            return new PersonDTO(name, age);
+        public Builder withCreatedAt(LocalDateTime createdAt) {
+            this.createdAt = createdAt;
+            return this;
+        }
+
+        public PersonProcessedDTO build() {
+            return new PersonProcessedDTO(id, name, age, createdAt);
         }
     }
 

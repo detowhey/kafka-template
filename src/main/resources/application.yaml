@@ -8,7 +8,13 @@ spring:
   cloud:
     stream:
       bindings:
-        registerNewPerson-in-0:
-          destination: register-person-topic
+        processPerson-in-0:
+          destination: register-person
           group: person-consumer-group
           content-type: application/json
+        processPerson-out-0:
+          destination: register-person-publisher
+          content-type: application/json
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
